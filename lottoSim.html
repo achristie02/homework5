@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Lottery Sim</title>
+<style type="text/css">
+    html,body {font-size: 20px;}
+</style>
+</head>
+
+<body>
+
+	
+
+    <script language="javascript">
+	function getRandomInt(max) {
+  		return Math.floor(Math.random() * max) + 1;
+	}
+
+	function checkWinner(num) {
+		if (num == 12 || num == 15 || num == 24 || num == 35 || num == 48) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	function payout(correct, luckyCorrect) {
+		if (correct == 0 && luckyCorrect == true) {
+			return "$4";
+		} else if (correct == 1 && luckyCorrect == true) {
+			return "$6";
+		} else if (correct == 2 && luckyCorrect == false) {
+			return "$3";
+		} else if (correct == 2 && luckyCorrect == true) {
+			return "$25";
+		} else if (correct == 3 && luckyCorrect == false) {
+			return "$20";
+		} else if (correct == 3 && luckyCorrect == true) {
+			return "$150";
+		} else if (correct == 4 && luckyCorrect == false) {
+			return "$200";
+		} else if (correct == 4 && luckyCorrect == true) {
+			return "$5000";
+		} else if (correct == 5 && luckyCorrect == false) {
+			return "$25,000 a YEAR for LIFE";
+		} else if (correct == 1 && luckyCorrect == true) {
+			return "$7,000 a WEEK for LIFE";
+		} else {
+			return "$0";
+		}
+	}
+
+	let num1 = getRandomInt(48);
+	let num2 = getRandomInt(48);
+	let num3 = getRandomInt(48);
+	let num4 = getRandomInt(48);
+	let num5 = getRandomInt(48);
+	let lucky = getRandomInt(18);
+	var pick = [num1, num2, num3, num4, num5];
+	var winner = [12, 15, 24, 35, 48];
+
+	document.write("Pick: ");
+	for (let i = 0; i < 5; i++) {
+		document.write(pick[i] + " ");
+	}
+	document.write("<br >");
+
+	pick.sort(function(a, b) {
+  		return a - b;
+	});
+
+	document.write("Sorted pick: ");
+	for (let i = 0; i < 5; i++) {
+		document.write(pick[i] + " ");
+	}
+	document.write("<br >");
+	document.write("Lucky Ball value: " + lucky + "<br >");
+	
+	document.write("Winning numbers: ");
+	for (let i = 0; i < 5; i++) {
+		document.write(winner[i] + " ");
+	}
+	document.write("<br > Winning Lucky Ball: 3 <br >");
+
+	var correct = 0;
+	var luckyCorrect = false;
+	for (let i = 0; i < 5; i++) {
+		correct += checkWinner(pick[i]);
+	}
+	if (lucky == 3) {
+		luckyCorrect = true;
+	}
+	document.write("Matching with the winning numbers: " + correct + "<br >");
+	if (luckyCorrect == true) {
+		document.write("Congrats! You got the Lucky Ball right! <br >");
+	} else {
+		document.write("Unfortunately, you did not match the Lucky Ball <br >");
+	}
+
+	var payout = payout(correct, luckyCorrect);
+	document.write("Payout for your pick: " + payout);
+    </script>
+
+
+</body>
+</html>
